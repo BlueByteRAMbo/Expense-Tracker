@@ -1,16 +1,23 @@
-function ExpenseItem({expense, onDeleteExpense}){
+function ExpenseItem({expense,onDeleteExpense}){
 
-    function handleDelete(){
-        onDeleteExpense(expense.id)
-    }
-    return(
-        <div>
-        <h5>
-        {expense.name} | {expense.amount} | {expense.category}
-        <button onClick={handleDelete}>Delete</button>
-        </h5>
-        </div>
-    );
+  return(
+    <div className="expense-item">
+
+      <span>{expense.name}</span>
+
+      <span>{expense.category}</span>
+
+      <span>${expense.amount}</span>
+
+      <button
+        className="delete-btn"
+        onClick={()=>onDeleteExpense(expense.id)}
+      >
+        Delete
+      </button>
+
+    </div>
+  )
 }
 
-export default ExpenseItem;
+export default ExpenseItem

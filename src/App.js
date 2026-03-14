@@ -2,39 +2,47 @@ import { useState } from "react";
 import Header from "./components/Header";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
+import SummaryPanel from "./components/SummaryPanel";
+import "./styles/main.css";
 
 function App() {
-
   const [expenses, setExpenses] = useState([]);
 
-  function handleAddExpense(expense){
-    setExpenses((prevExpenses) => {
-      return [...prevExpenses, expense];
-    });
+  function handleAddExpense(expense) {
+    setExpenses((prev) => [...prev, expense]);
   }
 
-  function handleDeleteExpense(id){
-    setExpenses((prevExpenses)=>{
-      return prevExpenses.filter((expense) => expense.id !== id)
-    })
+  function handleDeleteExpense(id) {
+    setExpenses((prev) =>
+      prev.filter((expense) => expense.id !== id)
+    );
   }
 
   return (
-    <>
+    <div className="app">
+
       <Header />
 
-      <ExpenseForm 
-      onAddExpense={handleAddExpense} 
-      />
+      <div className="dashboard">
 
-      {console.log(expenses)}
+        <div className="panel form-panel">
+          <ExpenseForm onAddExpense={handleAddExpense} />
+        </div>
 
-      <ExpenseList 
-      expenses={expenses} 
-      onDeleteExpense={handleDeleteExpense}
-      />
-      <p>Total Expenses: {expenses.length}</p>
-    </>
+        <div className="panel summary-panel">
+          <SummaryPanel expenses={expenses} />
+        </div>
+
+      </div>
+
+      <div className="panel list-panel">
+        <ExpenseList
+          expenses={expenses}
+          onDeleteExpense={handleDeleteExpense}
+        />
+      </div>
+
+    </div>
   );
 }
 
