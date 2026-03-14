@@ -1,55 +1,54 @@
-import { useState } from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Tooltip, Cell } from "recharts";
 
 function SummaryPanel({ expenses }) {
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#AF19FF"];
-  const groupedExpenses = expenses.reduce((acc, expense) => {
-    if (!acc[expense.category]) acc[expense.category] = 0;
-    acc[expense.category] += expense.amount;
+
+  const total = expenses.reduce(
+    (sum, exp) => sum + exp.amount, 0
+  );
+
+  const grouped = expenses.reduce((acc, exp) => {
+
+    if (!acc[exp.category]) acc[exp.category] = 0;
+    acc[exp.category] += exp.amount;
+
     return acc;
+
   }, {});
 
-  const categoryEntries = Object.entries(groupedExpenses);
+  const chartData = Object.entries(grouped).map(
+    ([name, value]) => ({ name, value })
+  );
 
-  const chartData = Object.entries(groupedExpenses).map(
-      ([category, amount]) => ({
-        name: category,
-        value: amount
-      })
-    );
-  const totalAmount = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+  const COLORS = [
+    "#6366f1","#22c55e","#f59e0b","#ef4444","#06b6d4"
+  ];
 
   return (
     <div>
+
       <h3>Total Spending</h3>
 
-    <p className="total">${totalAmount}</p>
+      <p className="total">${total}</p>
 
-    {Object.entries(groupedExpenses).map(([cat,val])=>(
-      <div className="summary-row" key={cat}>
-        <span>{cat}</span>
-        <span>${val}</span>
-      </div>
-    ))}
-    <div className="recharts-wrapper">
-    <PieChart width={400} height={300} >
-      <Pie
-        data={chartData}
-        dataKey="value"
-        nameKey="name"
-        cx="50%"
-        cy="50%"
-        outerRadius={100}
-      >
-        {chartData.map((entry, index) => (
-          <Cell key={index} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
+      <PieChart width={300} height={220}>
+        <Pie
+          data={chartData}
+          dataKey="value"
+          nameKey="name"
+          outerRadius={80}
+        >
+          {chartData.map((entry, index) => (
+            <Cell
+              key={index}
+              fill={COLORS[index % COLORS.length]}
+            />
+          ))}
+        </Pie>
 
-      <Tooltip />
-      <Legend />
-    </PieChart>
-    </div>
+        <Tooltip />
+
+      </PieChart>
+
     </div>
   );
 }

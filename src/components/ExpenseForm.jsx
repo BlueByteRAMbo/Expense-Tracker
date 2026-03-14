@@ -1,63 +1,66 @@
 import { useState } from "react";
 import { categories } from "../utils/categories";
 
-function ExpenseForm({ onAddExpense } = {}){
+function ExpenseForm({ onAddExpense }) {
 
-    const [name,setName] = useState("");
-    const [amount,setAmount] = useState("");
-    const [category,setCategory] = useState("Food");
+  const today = new Date().toISOString().split("T")[0];
 
-    function handleSubmit(event){
-        event.preventDefault();
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("Food");
+  const [date, setDate] = useState(today);
 
-        if( !name || !amount) return;
-        
-        const newExpense = {
-            id: Date.now(),
-            name,
-            amount: Number(amount),
-            category
-        };
+  function handleSubmit(e) {
+    e.preventDefault();
 
-        onAddExpense?.(newExpense);
-        setName("");
-        setAmount("");
-        setCategory("Food");
-    }
+    if (!name || !amount) return;
 
-    return (
+    const newExpense = {
+      id: Date.now(),
+      name,
+      amount: Number(amount),
+      category,
+      date
+    };
+
+    onAddExpense(newExpense);
+
+    setName("");
+    setAmount("");
+  }
+
+  return (
     <form onSubmit={handleSubmit}>
 
-      <h2>Add Expense</h2>
-
       <input
-        type="text"
         placeholder="Expense name"
         value={name}
-        onChange={(event) => setName(event.target.value)}
+        onChange={e => setName(e.target.value)}
       />
 
       <input
         type="number"
         placeholder="Amount"
         value={amount}
-        onChange={(event) => setAmount(event.target.value)}
+        onChange={e => setAmount(e.target.value)}
       />
 
       <select
         value={category}
-        onChange={(event) => setCategory(event.target.value)}
+        onChange={e => setCategory(e.target.value)}
       >
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
+        {categories.map(cat => (
+          <option key={cat} value={cat}>{cat}</option>
         ))}
       </select>
 
-      <button type="submit">
-        Add Expense
-      </button>
+      <input
+        type="date"
+        value={date}
+        onChange={e => setDate(e.target.value)}
+      />
+
+      <button>Add Expense</button>
 
     </form>
   );

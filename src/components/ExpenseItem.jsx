@@ -1,6 +1,6 @@
-function ExpenseItem({expense,onDeleteExpense}){
+function ExpenseItem({ expense, onDeleteExpense }) {
 
-  return(
+  return (
     <div className="expense-item">
 
       <span>{expense.name}</span>
@@ -9,15 +9,17 @@ function ExpenseItem({expense,onDeleteExpense}){
 
       <span>${expense.amount}</span>
 
+      <span>{expense.date}</span>
+
       <button
         className="delete-btn"
-        onClick={()=>onDeleteExpense(expense.id)}
+        onClick={() => onDeleteExpense(expense.id)}
       >
         Delete
       </button>
 
     </div>
-  )
+  );
 }
 
-export default ExpenseItem
+export default ExpenseItem;
