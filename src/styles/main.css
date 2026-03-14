@@ -17,16 +17,12 @@ h1{
   margin-bottom:40px;
 }
 
-/* dashboard grid */
-
 .dashboard{
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap:24px;
   margin-bottom:24px;
 }
-
-/* card panels */
 
 .panel{
   background: rgba(255,255,255,0.75);
@@ -71,8 +67,27 @@ button:hover{
   transform:scale(1.03);
 }
 
+.expense-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
 
-/* expense list */
+.expense-table th{
+  text-align:left;
+  padding:12px;
+  border-bottom:2px solid #e5e7eb;
+  font-weight:600;
+}
+
+.expense-table td{
+  padding:12px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.expense-table tr:hover{
+  background:#f8fafc;
+}
 
 .expense-item{
   display:flex;
@@ -83,9 +98,9 @@ button:hover{
   font-size:15px;
 }
 
-/* .expense-item span:nth-child(1){
+.expense-item span:nth-child(1){
   font-weight:500;
-} */
+}
 .expense-item span:last-child{
   font-weight:600;
   color:#4f46e5;
@@ -102,8 +117,6 @@ button:hover{
   background:#dc2626;
 }
 
-/* summary text */
-
 .summary-row{
   display:flex;
   justify-content:space-between;
@@ -119,8 +132,6 @@ button:hover{
 .recharts-wrapper{
   margin:auto;
 }
-
-/* mobile */
 
 @media(max-width:800px){
 

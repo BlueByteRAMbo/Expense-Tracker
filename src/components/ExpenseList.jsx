@@ -6,17 +6,29 @@ function ExpenseList({ expenses, onDeleteExpense }) {
     return <p>No expenses found</p>;
 
   return (
-    <div>
+    <table className="expense-table">
 
-      {expenses.map(exp => (
-        <ExpenseItem
-          key={exp.id}
-          expense={exp}
-          onDeleteExpense={onDeleteExpense}
-        />
-      ))}
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
 
-    </div>
+      <tbody>
+        {expenses.map(exp => (
+          <ExpenseItem
+            key={exp.id}
+            expense={exp}
+            onDeleteExpense={onDeleteExpense}
+          />
+        ))}
+      </tbody>
+
+    </table>
   );
 }
 

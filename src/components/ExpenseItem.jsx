@@ -1,24 +1,28 @@
 function ExpenseItem({ expense, onDeleteExpense }) {
 
   return (
-    <div className="expense-item">
+    <tr>
 
-      <span>{expense.name}</span>
+      <td>{expense.name}</td>
 
-      <span>{expense.category}</span>
+      <td>{expense.category}</td>
 
-      <span>${expense.amount}</span>
+      <td>${expense.amount}</td>
 
-      <span>{expense.date}</span>
+      <td>
+        {new Date(expense.date).toLocaleDateString()}
+      </td>
 
-      <button
-        className="delete-btn"
-        onClick={() => onDeleteExpense(expense.id)}
-      >
-        Delete
-      </button>
+      <td>
+        <button
+          className="delete-btn"
+          onClick={() => onDeleteExpense(expense.id)}
+        >
+          Delete
+        </button>
+      </td>
 
-    </div>
+    </tr>
   );
 }
 
